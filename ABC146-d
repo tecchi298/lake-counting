@@ -1,0 +1,25 @@
+n = int(input())
+p = []
+for i in range(n-1):
+    p.append(list(map(int, input().split())))
+color = [0 for i in range(n-1)] #各辺の色
+Ncolor = [[] for i in range(n)] #各頂点で使った色
+maxcolor = 1
+for i, value in enumerate(p):
+    color[i] = 1
+    l = value[0]-1
+    r = value[1]-1
+    for j in range(10000000):
+        if color[i] in Ncolor[l]:
+            color[i] = color[i] + 1
+        elif color[i] in Ncolor[r]:
+            color[i] = color[i] + 1　#使ってない色探索
+        else:
+            Ncolor[l].append(color[i])
+            Ncolor[r].append(color[i])
+            if maxcolor < color[i]:
+                maxcolor = int(color[i])
+            break
+print(maxcolor)
+for i in color:
+    print(i)
